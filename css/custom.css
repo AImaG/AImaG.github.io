@@ -1,0 +1,398 @@
+/* ============================================================
+   AImaG Blog — 技术文章视觉增强
+   只增强样式，不改变文章内容和主题结构
+   ============================================================ */
+
+
+/* ----------------------------------------------------------
+   1. 全局阅读体验
+   ---------------------------------------------------------- */
+.post-container {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  word-break: break-word;
+}
+
+/* 段落间距优化：技术文章段落不宜太松 */
+.post-container p {
+  margin: 20px 0;
+}
+
+
+/* ----------------------------------------------------------
+   2. 标题层级 — h2 带左侧色条，h3 加下划线，章节感更强
+   ---------------------------------------------------------- */
+.post-container h1 {
+  font-size: 1.75em;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid #eaecef;
+  color: #1a1a1a;
+}
+
+.post-container h2 {
+  font-size: 1.45em;
+  margin-top: 2.2em;
+  margin-bottom: 0.8em;
+  padding: 0.35em 0 0.35em 0.8em;
+  border-left: 4px solid #0085a1;
+  border-bottom: 1px solid #eef0f2;
+  color: #1a1a1a;
+  background: linear-gradient(90deg, rgba(0,133,161,0.04) 0%, transparent 100%);
+}
+
+.post-container h3 {
+  font-size: 1.2em;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px dashed #d0d7de;
+  color: #24292f;
+}
+
+.post-container h4 {
+  font-size: 1.05em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: #24292f;
+  font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------
+   3. 代码块 — 暗色主题，圆角，阴影，语言标签
+   ---------------------------------------------------------- */
+
+/* 代码块外层容器 */
+.post-container .highlight {
+  position: relative;
+  margin: 1.4em 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #30363d;
+}
+
+/* 暗色背景 */
+.post-container .highlight pre,
+.post-container pre {
+  background: #0d1117 !important;
+  border: none !important;
+  border-radius: 8px;
+  padding: 1.2em 1.4em !important;
+  color: #e6edf3;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-overflow-scrolling: touch;
+}
+
+.post-container .highlight pre code,
+.post-container pre code {
+  background: transparent !important;
+  color: #e6edf3;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 14px;
+}
+
+/* 行内代码 */
+.post-container code {
+  background: rgba(0,133,161,0.08);
+  color: #0085a1;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  word-break: break-word;
+}
+
+/* 行内代码放在 pre 里面时不要背景色（已被 .highlight pre 覆盖） */
+.post-container pre code {
+  background: transparent !important;
+  color: #e6edf3;
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+}
+
+/* 暗色主题下的语法高亮配色（GitHub Dark 风格） */
+.post-container .highlight .c  { color: #8b949e; font-style: italic; }
+.post-container .highlight .c1 { color: #8b949e; font-style: italic; }
+.post-container .highlight .cm { color: #8b949e; font-style: italic; }
+.post-container .highlight .cs { color: #8b949e; font-style: italic; }
+.post-container .highlight .k  { color: #ff7b72; font-weight: bold; }
+.post-container .highlight .kd { color: #ff7b72; }
+.post-container .highlight .kn { color: #ff7b72; }
+.post-container .highlight .kr { color: #ff7b72; }
+.post-container .highlight .kt { color: #79c0ff; }
+.post-container .highlight .s  { color: #a5d6ff; }
+.post-container .highlight .s1 { color: #a5d6ff; }
+.post-container .highlight .s2 { color: #a5d6ff; }
+.post-container .highlight .sb { color: #a5d6ff; }
+.post-container .highlight .sc { color: #a5d6ff; }
+.post-container .highlight .sd { color: #a5d6ff; }
+.post-container .highlight .se { color: #a5d6ff; }
+.post-container .highlight .sh { color: #a5d6ff; }
+.post-container .highlight .si { color: #a5d6ff; }
+.post-container .highlight .sr { color: #7ee787; }
+.post-container .highlight .nf { color: #d2a8ff; }
+.post-container .highlight .nc { color: #f0883e; }
+.post-container .highlight .nb { color: #79c0ff; }
+.post-container .highlight .na { color: #79c0ff; }
+.post-container .highlight .nt { color: #7ee787; }
+.post-container .highlight .nv { color: #79c0ff; }
+.post-container .highlight .nn { color: #79c0ff; }
+.post-container .highlight .m  { color: #79c0ff; }
+.post-container .highlight .mf { color: #79c0ff; }
+.post-container .highlight .mi { color: #79c0ff; }
+.post-container .highlight .mh { color: #79c0ff; }
+.post-container .highlight .il { color: #79c0ff; }
+.post-container .highlight .o  { color: #ff7b72; }
+.post-container .highlight .ow { color: #ff7b72; }
+.post-container .highlight .gp { color: #8b949e; }
+.post-container .highlight .gd { color: #ffa198; background: rgba(255,99,71,0.1); }
+.post-container .highlight .gi { color: #7ee787; background: rgba(126,231,135,0.1); }
+.post-container .highlight .err { color: #ffa198; background: rgba(255,99,71,0.15); }
+.post-container .highlight .w  { color: #6e7681; }
+.post-container .highlight .gu { color: #d2a8ff; }
+
+
+/* ----------------------------------------------------------
+   4. 表格 — 现代风格：圆角，条纹，hover，header 着色
+   ---------------------------------------------------------- */
+.post-container table {
+  width: 100%;
+  margin: 1.4em 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #d0d7de;
+  font-size: 0.95em;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.post-container table thead th {
+  background: #f6f8fa;
+  color: #1a1a1a;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-bottom: 2px solid #d0d7de;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.post-container table tbody td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #eef0f2;
+  color: #333;
+}
+
+.post-container table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 斑马纹 */
+.post-container table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+/* hover 高亮行 */
+.post-container table tbody tr:hover {
+  background: #eef4f8;
+}
+
+
+/* ----------------------------------------------------------
+   5. 引用块 — 左侧色条 + 浅色背景，不再灰斜体
+   ---------------------------------------------------------- */
+.post-container blockquote {
+  margin: 1.4em 0;
+  padding: 1em 1.2em 1em 1.5em;
+  border-left: 4px solid #0085a1;
+  background: rgba(0,133,161,0.04);
+  border-radius: 0 6px 6px 0;
+  color: #404040;
+  font-style: normal;
+  font-size: 1em;
+}
+
+.post-container blockquote p {
+  margin: 0.3em 0;
+  line-height: 1.7;
+}
+
+/* 嵌套引用 */
+.post-container blockquote blockquote {
+  border-left-color: #f0883e;
+  background: rgba(240,136,62,0.04);
+}
+
+
+/* ----------------------------------------------------------
+   6. Mermaid 图 — 居中 + 阴影 + 圆角
+   ---------------------------------------------------------- */
+.post-container .mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.6em auto;
+  padding: 1.2em;
+  background: #fafbfc;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.post-container .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ----------------------------------------------------------
+   7. MathJax 公式 — 行内公式微调
+   ---------------------------------------------------------- */
+/* 行内公式和文字对齐 */
+mjx-container[jax="CHTML"] {
+  font-size: 110% !important;
+}
+
+/* 独立公式居中 */
+mjx-container[jax="CHTML"][display="true"] {
+  margin: 1.2em 0 !important;
+  overflow-x: auto;
+  padding: 0.5em 0;
+}
+
+
+/* ----------------------------------------------------------
+   8. 图片 — 圆角 + 阴影 + 居中
+   ---------------------------------------------------------- */
+.post-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: block;
+  margin: 1.4em auto;
+}
+
+
+/* ----------------------------------------------------------
+   9. 列表 — 优化缩进和间距
+   ---------------------------------------------------------- */
+.post-container ul,
+.post-container ol {
+  margin-bottom: 1.2em;
+  padding-left: 2em;
+}
+
+.post-container li {
+  margin-bottom: 0.4em;
+  line-height: 1.7;
+}
+
+.post-container li > p {
+  margin: 0.2em 0;
+}
+
+
+/* ----------------------------------------------------------
+   10. 分隔线 — 更优雅
+   ---------------------------------------------------------- */
+.post-container hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d0d7de, transparent);
+  margin: 2em 0;
+}
+
+
+/* ----------------------------------------------------------
+   11. 链接 — 下划线微调
+   ---------------------------------------------------------- */
+.post-container a {
+  color: #0085a1;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,133,161,0.3);
+  transition: all 0.2s ease;
+}
+
+.post-container a:hover {
+  color: #006680;
+  border-bottom-color: #006680;
+}
+
+
+/* ----------------------------------------------------------
+   12. 目录（侧边栏）— 小优化
+   ---------------------------------------------------------- */
+.side-catalog .catalog-body li a {
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.side-catalog .catalog-body .active a {
+  color: #0085a1 !important;
+  font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------
+   13. 文章 Header — 标题底部加微光
+   ---------------------------------------------------------- */
+.intro-header .post-heading h1 {
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.intro-header .post-heading .subheading {
+  text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+}
+
+
+/* ----------------------------------------------------------
+   14. 阅读进度条（顶部）
+   ---------------------------------------------------------- */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #0085a1, #00c6c2);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 4px rgba(0,133,161,0.4);
+}
+
+
+/* ----------------------------------------------------------
+   15. 移动端适配
+   ---------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  .post-container {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .post-container h1 { font-size: 1.4em; }
+  .post-container h2 { font-size: 1.25em; }
+  .post-container h3 { font-size: 1.1em; }
+
+  .post-container .highlight pre,
+  .post-container pre {
+    font-size: 13px;
+    padding: 1em !important;
+    border-radius: 6px;
+  }
+
+  .post-container table {
+    font-size: 0.85em;
+  }
+
+  .post-container .mermaid {
+    padding: 0.8em;
+  }
+}
