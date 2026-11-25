@@ -62,7 +62,9 @@
 
 
 /* ----------------------------------------------------------
-   3. 代码块 — 暗色主题，圆角，阴影，语言标签
+   3. 代码块 — 暗色主题，圆角，阴影
+   策略：先全量重置为浅色文字（防止 syntax.css 残留浅色主题颜色），
+   再按 GitHub Dark 风格逐层着色
    ---------------------------------------------------------- */
 
 /* 代码块外层容器 */
@@ -75,28 +77,42 @@
   border: 1px solid #30363d;
 }
 
-/* 暗色背景 */
+/* 暗色背景 + 圆角 */
 .post-container .highlight pre,
 .post-container pre {
   background: #0d1117 !important;
-  border: none !important;
+  border: 1px solid #30363d !important;
   border-radius: 8px;
   padding: 1.2em 1.4em !important;
-  color: #e6edf3;
+  color: #e6edf3 !important;
   font-size: 14px;
   line-height: 1.6;
   -webkit-overflow-scrolling: touch;
 }
 
+/* ★ 关键：全量重置 code 内所有子元素颜色为浅色
+   防止 syntax.css 的浅色主题颜色（#333, teal 等）在暗底上不可见 */
 .post-container .highlight pre code,
-.post-container pre code {
+.post-container .highlight pre code *,
+.post-container pre code,
+.post-container pre code * {
   background: transparent !important;
-  color: #e6edf3;
-  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Menlo', 'Consolas', monospace;
-  font-size: 14px;
+  color: #e6edf3 !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Menlo', 'Consolas', monospace !important;
+  font-size: 14px !important;
+  border: none !important;
 }
 
-/* 行内代码 */
+/* 覆盖 syntax.css 的 nowrap（会导致代码块不换行溢出） */
+.post-container .highlight pre code * {
+  white-space: inherit !important;
+}
+.post-container .highlight pre code {
+  white-space: pre !important;
+  word-wrap: normal !important;
+}
+
+/* 行内代码（非代码块内的 `code`） */
 .post-container code {
   background: rgba(0,133,161,0.08);
   color: #0085a1;
@@ -107,55 +123,124 @@
   word-break: break-word;
 }
 
-/* 行内代码放在 pre 里面时不要背景色（已被 .highlight pre 覆盖） */
+/* ★ 在 pre 内的行内代码恢复暗色主题样式 */
 .post-container pre code {
   background: transparent !important;
-  color: #e6edf3;
-  padding: 0;
-  border-radius: 0;
-  font-size: 14px;
+  color: #e6edf3 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
 }
 
-/* 暗色主题下的语法高亮配色（GitHub Dark 风格） */
-.post-container .highlight .c  { color: #8b949e; font-style: italic; }
-.post-container .highlight .c1 { color: #8b949e; font-style: italic; }
-.post-container .highlight .cm { color: #8b949e; font-style: italic; }
-.post-container .highlight .cs { color: #8b949e; font-style: italic; }
-.post-container .highlight .k  { color: #ff7b72; font-weight: bold; }
-.post-container .highlight .kd { color: #ff7b72; }
-.post-container .highlight .kn { color: #ff7b72; }
-.post-container .highlight .kr { color: #ff7b72; }
-.post-container .highlight .kt { color: #79c0ff; }
-.post-container .highlight .s  { color: #a5d6ff; }
-.post-container .highlight .s1 { color: #a5d6ff; }
-.post-container .highlight .s2 { color: #a5d6ff; }
-.post-container .highlight .sb { color: #a5d6ff; }
-.post-container .highlight .sc { color: #a5d6ff; }
-.post-container .highlight .sd { color: #a5d6ff; }
-.post-container .highlight .se { color: #a5d6ff; }
-.post-container .highlight .sh { color: #a5d6ff; }
-.post-container .highlight .si { color: #a5d6ff; }
-.post-container .highlight .sr { color: #7ee787; }
-.post-container .highlight .nf { color: #d2a8ff; }
-.post-container .highlight .nc { color: #f0883e; }
-.post-container .highlight .nb { color: #79c0ff; }
-.post-container .highlight .na { color: #79c0ff; }
-.post-container .highlight .nt { color: #7ee787; }
-.post-container .highlight .nv { color: #79c0ff; }
-.post-container .highlight .nn { color: #79c0ff; }
-.post-container .highlight .m  { color: #79c0ff; }
-.post-container .highlight .mf { color: #79c0ff; }
-.post-container .highlight .mi { color: #79c0ff; }
-.post-container .highlight .mh { color: #79c0ff; }
-.post-container .highlight .il { color: #79c0ff; }
-.post-container .highlight .o  { color: #ff7b72; }
-.post-container .highlight .ow { color: #ff7b72; }
-.post-container .highlight .gp { color: #8b949e; }
-.post-container .highlight .gd { color: #ffa198; background: rgba(255,99,71,0.1); }
-.post-container .highlight .gi { color: #7ee787; background: rgba(126,231,135,0.1); }
-.post-container .highlight .err { color: #ffa198; background: rgba(255,99,71,0.15); }
-.post-container .highlight .w  { color: #6e7681; }
-.post-container .highlight .gu { color: #d2a8ff; }
+/* ★★★ GitHub Dark 语法高亮（在全局重置之上逐层着色）★★★ */
+
+/* 注释 */
+.post-container .highlight .c,
+.post-container .highlight .c1,
+.post-container .highlight .cm,
+.post-container .highlight .cs {
+  color: #8b949e !important;
+  font-style: italic !important;
+}
+
+/* 关键字 */
+.post-container .highlight .k,
+.post-container .highlight .kd,
+.post-container .highlight .kn,
+.post-container .highlight .kp,
+.post-container .highlight .kr,
+.post-container .highlight .ow {
+  color: #ff7b72 !important;
+  font-weight: bold !important;
+}
+
+/* 类型 / 内置名 */
+.post-container .highlight .kt,
+.post-container .highlight .nc,
+.post-container .highlight .nb,
+.post-container .highlight .nn,
+.post-container .highlight .nv,
+.post-container .highlight .vc,
+.post-container .highlight .vg,
+.post-container .highlight .vi {
+  color: #79c0ff !important;
+}
+
+/* 标签 / 属性名 */
+.post-container .highlight .nt,
+.post-container .highlight .na {
+  color: #7ee787 !important;
+}
+
+/* 字符串 */
+.post-container .highlight .s,
+.post-container .highlight .s1,
+.post-container .highlight .s2,
+.post-container .highlight .sb,
+.post-container .highlight .sc,
+.post-container .highlight .sd,
+.post-container .highlight .se,
+.post-container .highlight .sh,
+.post-container .highlight .si,
+.post-container .highlight .sx {
+  color: #a5d6ff !important;
+}
+
+/* 正则 */
+.post-container .highlight .sr {
+  color: #7ee787 !important;
+}
+
+/* 函数名 */
+.post-container .highlight .nf,
+.post-container .highlight .ne {
+  color: #d2a8ff !important;
+}
+
+/* 数字 */
+.post-container .highlight .m,
+.post-container .highlight .mf,
+.post-container .highlight .mh,
+.post-container .highlight .mi,
+.post-container .highlight .mo,
+.post-container .highlight .il {
+  color: #79c0ff !important;
+}
+
+/* 运算符 */
+.post-container .highlight .o {
+  color: #ff7b72 !important;
+}
+
+/* 普通标识符 / 变量 — 暗底上用浅色 */
+.post-container .highlight .n {
+  color: #e6edf3 !important;
+}
+
+/* 其他浅色主题遗漏项 */
+.post-container .highlight .no { color: #79c0ff !important; }  /* 常量 */
+.post-container .highlight .ni { color: #d2a8ff !important; }  /* 内置 */
+.post-container .highlight .bp { color: #79c0ff !important; }  /* 伪变量 */
+.post-container .highlight .ss { color: #a5d6ff !important; }  /* 符号串 */
+.post-container .highlight .cp { color: #8b949e !important; }  /* 预处理 */
+.post-container .highlight .gh { color: #8b949e !important; }  /* 标题 */
+.post-container .highlight .gu { color: #d2a8ff !important; }  /* 标题细 */
+.post-container .highlight .gp { color: #8b949e !important; }  /* 提示 */
+.post-container .highlight .go { color: #8b949e !important; }  /* 通用输出 */
+.post-container .highlight .gs { font-weight: bold !important; }
+.post-container .highlight .ge { font-style: italic !important; }
+.post-container .highlight .w  { color: #6e7681 !important; }  /* 空白 */
+
+/* diff 增删 */
+.post-container .highlight .gd { color: #ffa198 !important; background: rgba(255,99,71,0.1) !important; }
+.post-container .highlight .gi { color: #7ee787 !important; background: rgba(126,231,135,0.1) !important; }
+.post-container .highlight .err { color: #ffa198 !important; background: rgba(255,99,71,0.15) !important; }
+
+/* 高亮行 */
+.post-container .highlight .hll {
+  background: rgba(0,133,161,0.1) !important;
+  border: none !important;
+}
 
 
 /* ----------------------------------------------------------
@@ -353,18 +438,19 @@ mjx-container[jax="CHTML"][display="true"] {
 
 
 /* ----------------------------------------------------------
-   14. 阅读进度条（顶部）
+   14. 阅读进度条（导航栏下方）
    ---------------------------------------------------------- */
 .reading-progress-bar {
   position: fixed;
-  top: 0;
+  top: 50px;         /* Bootstrap 固定导航栏高度，进度条紧贴导航栏底部 */
   left: 0;
   width: 0%;
   height: 3px;
   background: linear-gradient(90deg, #0085a1, #00c6c2);
-  z-index: 9999;
+  z-index: 1031;     /* 比导航栏 z-index(1030) 高一层 */
   transition: width 0.1s linear;
-  box-shadow: 0 0 4px rgba(0,133,161,0.4);
+  box-shadow: 0 1px 4px rgba(0,133,161,0.3);
+  pointer-events: none;
 }
 
 
