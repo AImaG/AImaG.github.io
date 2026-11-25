@@ -16,9 +16,21 @@ MathJax = {
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>
 mermaid.initialize({
-  startOnLoad: true,
+  startOnLoad: false,
   theme: 'default',
   securityLevel: 'loose'
+});
+// Jekyll 把 ```mermaid 渲染成 <pre><code class="language-mermaid">
+// mermaid 需要 <div class="mermaid">，这里做自动转换
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre code.language-mermaid').forEach(function(block) {
+    var pre = block.parentElement;
+    var div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = block.textContent;
+    pre.parentElement.replaceChild(div, pre);
+  });
+  mermaid.run();
 });
 </script>
 <head>
