@@ -104,7 +104,9 @@
         </div>
     </div>
     <!-- 阅读进度条 -->
-    <script src="{{ site.baseurl }}/js/reading-progress.js"></script>
+    <script>
+    (function(){var b=document.createElement('div');b.className='reading-progress-bar';document.body.appendChild(b);function u(){var s=window.pageYOffset||document.documentElement.scrollTop||0;var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;var p=h>0?Math.min(s/h*100,100):0;b.style.width=p+'%'}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u,{passive:true});if(document.readyState==='complete')u();else window.addEventListener('load',u)})();
+    </script>
 </footer>
 
 <!-- jQuery -->
